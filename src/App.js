@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Footer from './Footer/Footer';
+import Header from './Header/Header';
+import HomeScreen from './Screen/HomeScreen';
+import ProductScreen from './Screen/ProductScreen';
+import CartScreen from "./Screen/CartScreen";
+import SignInScreen from './Screen/SignInScreen';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="d-flex flex-column inner-container">
+        <header>
+          <Header />
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<HomeScreen />} />
+            <Route path="/api/products/details/:slug" element={<ProductScreen />} />
+            <Route path="/api/cart/products/" element={<CartScreen />} />
+            <Route path="/signin" element={<SignInScreen />} />
+          </Routes>
+        </main>
+        <footer>
+          <Footer />
+        </footer>
+      </div>
+    </BrowserRouter>
   );
 }
 
