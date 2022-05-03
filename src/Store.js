@@ -14,15 +14,15 @@ const reducer = (state, action) => {
     switch (action.type) {
         case "ADD_TO_CART":
             const newItem = action.payload
-            const existItem = state.cart.cartItem.find(item => item.slug === newItem.slug)
+            const existItem = state.cart.cartItem.find(item => item._id === newItem._id)
             const cartItem = existItem
-                ? state.cart.cartItem.map(item => item.slug === existItem.slug ? newItem : item)
+                ? state.cart.cartItem.map(item => item._id === existItem._id ? newItem : item)
                 : [...state.cart.cartItem, newItem]
                 localStorage.setItem("cartItem", JSON.stringify(cartItem))
             return { ...state, cart: { ...state.cart, cartItem } }
         case "CART_REMOVE_ITEM":
             {
-                const cartItem = state.cart.cartItem.filter(item => item.slug !== action.payload.slug)
+                const cartItem = state.cart.cartItem.filter(item => item._id !== action.payload._id)
                 localStorage.setItem("cartItem", JSON.stringify(cartItem))
                 return { ...state, cart: { ...state.cart, cartItem } }
             }

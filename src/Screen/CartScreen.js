@@ -15,7 +15,7 @@ const CartScreen = () => {
     const { cart: { cartItem } } = state
 
     const updateAddToCart = async (item, quantity) =>{
-        const { data } = await axios.get(`http://localhost:5000/api/products/cart/${item.slug}`)
+        const { data } = await axios.get(`http://localhost:5000/api/products/cart/${item._id}`)
         if(data.stock < quantity){
             window.alert("Sorry, product is out of stock");
             return;
@@ -50,11 +50,11 @@ const CartScreen = () => {
                             <ListGroup>
                                 {
                                     cartItem.map(item => (
-                                        <ListGroup.Item key={item.slug}>
+                                        <ListGroup.Item key={item._id}>
                                             <Row className='align-items-center'>
                                                 <Col md={4}>
                                                     <img src={item.img} alt={item.img} className="img-fluid rounded img-thumbnail" />
-                                                    <Link to={`/api/products/details/${item.slug}`}>{item.name}</Link>
+                                                    <Link to={`/api/products/details/${item._id}`}>{item.name}</Link>
                                                 </Col>
                                                 <Col md={3}>
                                                     <Button 

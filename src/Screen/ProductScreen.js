@@ -26,7 +26,7 @@ const ProductScreen = () => {
 
     const navigate = useNavigate()
     const params = useParams()
-    const { slug } = params
+    const { _id } = params
 
     const [{ loading, error, product }, dispatch] = useReducer((reducer), {
         product: [],
@@ -38,21 +38,21 @@ const ProductScreen = () => {
         const fetchData = async () => {
             dispatch({ type: "FETCH_REQUEST" })
             try {
-                const result = await axios.get(`http://localhost:5000/api/products/details/${slug}`);
+                const result = await axios.get(`http://localhost:5000/api/products/details/${_id}`);
                 dispatch({ type: "FETCH_SUCCESS", payload: result.data })
             } catch (err) {
                 dispatch({ type: "FETCH_FAIL", payload: err.message })
             }
         }
         fetchData()
-    }, [slug])
+    }, [_id])
 
     const {state , dispatch : ctxDispatch} = useContext(Store)
     const { cart } = state;
     const handleAddToCart = async () =>{
-        const existItem = cart.cartItem.find( x => x.slug === product.slug )
+        const existItem = cart.cartItem.find( x => x._id === product._id )
         const quantity = existItem ? existItem.quantity + 1 : 1
-        const { data } = await axios.get(`http://localhost:5000/api/products/cart/${product.slug}`)
+        const { data } = await axios.get(`http://localhost:5000/api/products/cart/${product._id}`)
         if(data.stock < quantity){
             window.alert("Sorry, product is out of stock");
             return;

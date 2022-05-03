@@ -18,7 +18,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomeScreen />} />
-            <Route path="/api/products/details/:slug" element={<ProductScreen />} />
+            <Route path="/api/products/details/:_id" element={<ProductScreen />} />
             <Route path="/api/cart/products/" element={<CartScreen />} />
             <Route path="/signin" element={<SignInScreen />} />
           </Routes>
