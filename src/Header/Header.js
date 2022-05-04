@@ -1,12 +1,19 @@
 import React, { useContext } from 'react'
-import { Badge, Container, Nav, Navbar } from 'react-bootstrap'
-import { Link, NavLink } from 'react-router-dom'
+import { Badge, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Store } from '../Store'
 
 const Header = () => {
 
-    const {state } = useContext(Store)
-    const { cart } = state
+    const { state, dispatch: ctxDispatch } = useContext(Store)
+    const { cart, userInfo } = state
+
+    const signoutHandler = () => {
+        ctxDispatch({ type: "SIGNOUT_USER" })
+        localStorage.removeItem("userInfo")
+        localStorage.removeItem("shippingAddress")
+    }
 
     return (
         <Navbar bg="dark" expand="lg" variant="dark">
@@ -15,9 +22,9 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     <Nav className="">
-                        <NavLink to="/" className='link'>Home</NavLink>
-                        <NavLink to="/" className='link'>Products</NavLink>
-                        <NavLink to="/api/cart/products/" className='link'>
+                        <Link to="/" className='link'>Home</Link>
+                        <Link to="/" className='link'>Products</Link>
+                        <Link to="/api/cart/products/" className='link'>
                             Cart
                             {
                                 cart.cartItem.length > 0 && (
@@ -26,11 +33,27 @@ const Header = () => {
                                     </Badge>
                                 )
                             }
-                        </NavLink>
+                        </Link>
+                        {
+                            userInfo
+                                ? (<NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                                    <LinkContainer to="/profile">
+                                        <NavDropdown.Item> User Profile</NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to="/orderhistory">
+                                        <NavDropdown.Item> Order History</NavDropdown.Item>
+                                    </LinkContainer>
+                                    <Link className='dropdown-item' to="#signout" onClick={() => signoutHandler()}>
+                                        Sign out
+                                    </Link>
+                                </NavDropdown>)
+                                :
+                                <Link to="/signin" className='link'>Sign in</Link>
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Container>
-        </Navbar>
+        </Navbar >
     )
 }
 

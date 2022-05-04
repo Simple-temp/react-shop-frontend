@@ -54,3 +54,12 @@ main{
   max-width:600px;
   margin:auto;
 }
+
+.checkout-steps > div {
+  border-bottom : 6px solid #a0a0a0;
+  color:#a0a0a0;
+}
+.checkout-steps > div.active {
+  border-bottom : 6px solid #f08000;
+  color:#f08000;
+}
