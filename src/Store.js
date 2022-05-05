@@ -11,7 +11,7 @@ const initialize = {
             ? JSON.parse(localStorage.getItem("shippingAddress"))
             : {},
         paymentMethod: localStorage.getItem("paymentMethod")
-            ? JSON.parse(localStorage.getItem("paymentMethod"))
+            ? localStorage.getItem("paymentMethod")
             : "",
         cartItem: localStorage.getItem("cartItem")
             ? JSON.parse(localStorage.getItem("cartItem"))
