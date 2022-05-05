@@ -13,6 +13,7 @@ const Header = () => {
         ctxDispatch({ type: "SIGNOUT_USER" })
         localStorage.removeItem("userInfo")
         localStorage.removeItem("shippingAddress")
+        localStorage.removeItem("paymentMethod")
     }
 
     return (

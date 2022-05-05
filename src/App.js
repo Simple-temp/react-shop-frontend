@@ -9,6 +9,8 @@ import ProductScreen from './Screen/ProductScreen';
 import CartScreen from "./Screen/CartScreen";
 import SignInScreen from './Screen/SignInScreen';
 import ShippingAddressScreen from './Screen/ShippingAddressScreen';
+import SignUpScreen from './Screen/SignUpScreen';
+import PaymentScreen from './Screen/PaymentScreen';
 
 
 function App() {
@@ -25,7 +27,9 @@ function App() {
             <Route path="/api/products/details/:_id" element={<ProductScreen />} />
             <Route path="/api/cart/products/" element={<CartScreen />} />
             <Route path="/signin" element={<SignInScreen />} />
+            <Route path="/signup" element={<SignUpScreen />} />
             <Route path="/shipping" element={<ShippingAddressScreen />} />
+            <Route path="/payment" element={<PaymentScreen />} />
           </Routes>
         </main>
         <footer>

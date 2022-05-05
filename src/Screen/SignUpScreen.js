@@ -6,24 +6,31 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Store } from '../Store';
 
-const SignInScreen = () => {
+const SignUpScreen = () => {
 
     const navigate = useNavigate()
     const { search } = useLocation()
     const redirectInUrl = new URLSearchParams(search).get("redirect")
     const redirect = redirectInUrl ? redirectInUrl : "/"
 
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [conPassword, setConPassword] = useState("")
 
     const { state, dispatch: ctxDispatch } = useContext(Store)
     const { userInfo } = state
 
     const haldleSubmit = async (e) => {
         e.preventDefault()
+        if(password !== conPassword){
+            toast.error(" password do not match")
+            return;
+        }
         try {
 
-            const { data } = await axios.post("/api/users/signin", {
+            const { data } = await axios.post("/api/users/signup", {
+                name,
                 email,
                 password
             })
@@ -49,10 +56,14 @@ const SignInScreen = () => {
 
             <Container className='signin-form'>
                 <Helmet>
-                    <title>Sign In</title>
+                    <title>Sign up</title>
                 </Helmet>
-                <h3 className='text-center my-3'>Sign In</h3>
+                <h3 className='text-center my-3'>Sign Up</h3>
                 <Form onSubmit={haldleSubmit}>
+                    <Form.Group className='mb-3' controlId='name'>
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control type='text' required onChange={(e) => setName(e.target.value)}></Form.Control>
+                    </Form.Group>
                     <Form.Group className='mb-3' controlId='email'>
                         <Form.Label>Email</Form.Label>
                         <Form.Control type='email' required onChange={(e) => setEmail(e.target.value)}></Form.Control>
@@ -61,12 +72,16 @@ const SignInScreen = () => {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type='password' required onChange={(e) => setPassword(e.target.value)}></Form.Control>
                     </Form.Group>
+                    <Form.Group className='mb-3' controlId='conpassword'>
+                        <Form.Label>confirm Password</Form.Label>
+                        <Form.Control type='password' required onChange={(e) => setConPassword(e.target.value)}></Form.Control>
+                    </Form.Group>
                     <div className='mb-3'>
-                        <Button type="submit">Sign in</Button>
+                        <Button type="submit">Sign UP</Button>
                     </div>
                     <div className='mb-3'>
-                        New customer? {" "}
-                        <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+                        Already have an account? {" "}
+                        <Link to={`/signin?redirect=${redirect}`}>sign in</Link>
                     </div>
                 </Form>
             </Container>
@@ -75,4 +90,4 @@ const SignInScreen = () => {
     );
 };
 
-export default SignInScreen;
+export default SignUpScreen;
