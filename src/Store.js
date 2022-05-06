@@ -35,6 +35,8 @@ const reducer = (state, action) => {
                 localStorage.setItem("cartItem", JSON.stringify(cartItem))
                 return { ...state, cart: { ...state.cart, cartItem } }
             }
+        case "CART_CLEAR":
+            return { ...state, cart: { ...state.cart, cartItem: [] } } 
         case "USER_LOGIN":
             return { ...state, userInfo: action.payload }
         case "SIGNOUT_USER":
