@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Badge, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Store } from '../Store'
 
 const Header = () => {
@@ -14,6 +14,7 @@ const Header = () => {
         localStorage.removeItem("userInfo")
         localStorage.removeItem("shippingAddress")
         localStorage.removeItem("paymentMethod")
+        window.location.href = "/signin"
     }
 
     return (
