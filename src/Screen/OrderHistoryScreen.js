@@ -38,7 +38,7 @@ const OrderHistoryScreen = () => {
         const fetchData = async () => {
             dispatch({ type: "FETCH_REQUEST" })
             try {
-                const { data } = await axios.get("http://localhost:5000/api/orders/mine",
+                const { data } = await axios.get("https://store00-1.herokuapp.com/api/orders/mine",
                     {
                         headers: { authorization: `Bearer ${userInfo.token}` }
                     }

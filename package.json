@@ -1,6 +1,6 @@
 {
   "name": "shop-frontend",
-  "proxy": "http://localhost:5000/",
+  "proxy": "https://store00-1.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
