@@ -40,7 +40,7 @@ const ProfileScreen = () => {
             return;
         }
         try {
-            const { data } = await axios.put("/api/users/profile",
+            const { data } = await axios.put("http://localhost:5000/api/users/profile",
                 {
                     name,
                     email,
