@@ -88,7 +88,7 @@ const SearchScreen = () => {
             try {
 
                 const { data } = await axios.get(
-                    `http://localhost:5000/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
+                    `https://store00-1.herokuapp.com/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
                 )
                 dispatch({ type: "FETCH_SUCCESS", payload: data })
 
@@ -105,7 +105,7 @@ const SearchScreen = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:5000/api/products/categories`)
+                const { data } = await axios.get(`https://store00-1.herokuapp.com/api/products/categories`)
                 // console.log(data)
                 setCategories(data)
             } catch (err) {
