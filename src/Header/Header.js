@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
-import { Badge, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Badge, Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
+import SearchBox from '../Components/SearchBox/SearchBox'
 import { Store } from '../Store'
 
-const Header = () => {
+const Header = ({sideBarIsOpen, setSideBarIsOpen}) => {
 
     const { state, dispatch: ctxDispatch } = useContext(Store)
     const { cart, userInfo } = state
@@ -20,9 +21,13 @@ const Header = () => {
     return (
         <Navbar bg="dark" expand="lg" variant="dark">
             <Container>
-                <Navbar.Brand> <Link to="/" className='link'>amazon</Link> </Navbar.Brand>
+                <Button variant='dark' onClick={()=>setSideBarIsOpen(!sideBarIsOpen)}>
+                    <i className="fa-solid fa-bars"></i>
+                </Button>
+                <Navbar.Brand> <Link to="/" className='link'>Store00</Link> </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                    <SearchBox/>
                     <Nav className="">
                         <Link to="/" className='link'>Home</Link>
                         <Link to="/" className='link'>Products</Link>
