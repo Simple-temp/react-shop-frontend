@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import SearchBox from '../Components/SearchBox/SearchBox'
 import { Store } from '../Store'
 
-const Header = ({sideBarIsOpen, setSideBarIsOpen}) => {
+const Header = ({ sideBarIsOpen, setSideBarIsOpen }) => {
 
     const { state, dispatch: ctxDispatch } = useContext(Store)
     const { cart, userInfo } = state
@@ -21,13 +21,13 @@ const Header = ({sideBarIsOpen, setSideBarIsOpen}) => {
     return (
         <Navbar bg="dark" expand="lg" variant="dark">
             <Container>
-                <Button variant='dark' onClick={()=>setSideBarIsOpen(!sideBarIsOpen)}>
+                <Button variant='dark' onClick={() => setSideBarIsOpen(!sideBarIsOpen)}>
                     <i className="fa-solid fa-bars"></i>
                 </Button>
                 <Navbar.Brand> <Link to="/" className='link'>Store00</Link> </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                    <SearchBox/>
+                    <SearchBox />
                     <Nav className="">
                         <Link to="/" className='link'>Home</Link>
                         <Link to="/" className='link'>Products</Link>
@@ -56,6 +56,23 @@ const Header = ({sideBarIsOpen, setSideBarIsOpen}) => {
                                 </NavDropdown>)
                                 :
                                 <Link to="/signin" className='link'>Sign in</Link>
+                        }
+                        {
+                            userInfo  && userInfo.isAdmin &&
+                                (<NavDropdown title="Admin" id="basic-nav-dropdown">
+                                    <LinkContainer to="/dashboard">
+                                        <NavDropdown.Item> Dashboard</NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to="/productlist">
+                                        <NavDropdown.Item> Product List </NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to="/orderlist">
+                                        <NavDropdown.Item> Orders List</NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to="/userlist">
+                                        <NavDropdown.Item> User List</NavDropdown.Item>
+                                    </LinkContainer>
+                                </NavDropdown>)
                         }
                     </Nav>
                 </Navbar.Collapse>
