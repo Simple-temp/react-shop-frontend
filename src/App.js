@@ -18,6 +18,7 @@ import ProfileScreen from './Screen/ProfileScreen';
 import { Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import axios from 'axios';
+import SearchScreen from './Screen/SearchScreen';
 
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
             <Route path="/" element={<HomeScreen />} />
             <Route path="/api/products/details/:_id" element={<ProductScreen />} />
             <Route path="/api/cart/products/" element={<CartScreen />} />
+            <Route path="/search" element={<SearchScreen />} />
             <Route path="/signin" element={<SignInScreen />} />
             <Route path="/signup" element={<SignUpScreen />} />
             <Route path="/shipping" element={<ShippingAddressScreen />} />
