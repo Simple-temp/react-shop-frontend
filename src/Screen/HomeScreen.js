@@ -32,7 +32,7 @@ const HomeScreen = () => {
     return (
         <div className='container'>
             <Helmet>
-                <title>Amazona</title>
+                <title>Store00</title>
             </Helmet>
             <div className="row mt-4">
                 {loading ? <LoadingBox/> 
