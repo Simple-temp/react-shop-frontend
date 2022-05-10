@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import StripeCheckout from 'react-stripe-checkout';
 import { Card, Col, ListGroup, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -8,7 +9,6 @@ import LoadingBox from "../Components/LoadingBox/LoadingBox"
 import MessageBox from "../Components/MessageBox/MessageBox"
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
-
 
 
 const reducer = (state, action) => {
@@ -34,6 +34,7 @@ const reducer = (state, action) => {
 
 const OrderScreen = () => {
 
+    const publishKey = "pk_test_51KJhEFFesKPGWiP3YH9pPx3aDpRX44wil8afCvneKe2ziTVEPoBgXnEFnanssjwK1RbAeyKbQV5kSBYGcjeOsxoB00m0ZXAjF8"
     const params = useParams()
     const { id: orderId } = params
     const navigate = useNavigate()
@@ -110,7 +111,7 @@ const OrderScreen = () => {
 
         if (!order._id || successPay || (order._id && order._id !== orderId)) {
             fetchOrder()
-            if(successPay){
+            if (successPay) {
                 dispatch({ type: "PAY_RESET" })
             }
         } else {
@@ -131,6 +132,32 @@ const OrderScreen = () => {
         }
 
     }, [order, userInfo, orderId, navigate, paypalDispatch, successPay])
+
+    const onToken = async (token) => {
+
+        try {
+            const { data } = await axios.put(`https://store00-1.herokuapp.com/api/orders/${order._id}/stripe`,
+                {
+                    headers: { authorization: `Bearer ${userInfo.token}` },
+                    token,
+                },
+                {
+                    data: {
+                        amount: order.totalPrice * 100,
+                        token,
+                    }
+                }
+            )
+            window.location.reload();
+            if(data){
+                toast.success("Paid Successfull")
+            }
+
+        } catch (err) {
+            toast.error("Not paid")
+        }
+
+    }
 
     return (
         loading ? <LoadingBox></LoadingBox>
@@ -221,7 +248,7 @@ const OrderScreen = () => {
                                             </Row>
                                         </ListGroup.Item>
                                         {
-                                            !order.isPaid && <ListGroup.Item>
+                                            !order.isPaid && order.paymentMethod === "PayPal" && <ListGroup.Item>
                                                 {
                                                     isPending ? <LoadingBox />
                                                         : <div>
@@ -235,14 +262,28 @@ const OrderScreen = () => {
                                             </ListGroup.Item>
                                         }
                                         {
-                                            loadigPay && <LoadingBox/>
+                                            !order.isPaid && order.paymentMethod === "Stripe" && < ListGroup.Item >
+                                                <StripeCheckout
+                                                    token={onToken}
+                                                    stripeKey={publishKey}
+                                                    name="Order total"
+                                                    amount={order.totalPrice * 100}
+                                                    label="Pay with Card"
+                                                    currency='USD'
+                                                    billingAddress
+                                                    shippingAddress
+                                                />
+                                            </ListGroup.Item>
+                                        }
+                                        {
+                                            loadigPay && <LoadingBox />
                                         }
                                     </ListGroup>
                                 </Card.Body>
                             </Card>
                         </Col>
                     </Row>
-                </div>
+                </div >
     );
 };
 

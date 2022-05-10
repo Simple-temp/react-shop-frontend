@@ -55,6 +55,23 @@ const OrderHistoryScreen = () => {
     }, [userInfo])
 
 
+    const handleRemove = async (id) =>{
+        try {
+            const { data } = await axios.delete(`https://store00-1.herokuapp.com/api/orders/${id}/delete`,
+                {
+                    headers: { authorization: `Bearer ${userInfo.token}` },
+                }
+            )
+            window.location.reload();
+            if(data){
+                toast.success("Delete Successfull")
+            }
+
+        } catch (err) {
+            toast.error("Not delete")
+        }
+    }
+
 
     return (
         loading ? <LoadingBox></LoadingBox>
@@ -72,26 +89,30 @@ const OrderHistoryScreen = () => {
                                 <th>TOTAL</th>
                                 <th>PAID</th>
                                 <th>DELIVERED</th>
+                                <th>DETAILS</th>
                                 <th>ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
                             {orders.map((order) => (
                                 <tr key={order._id}>
-                                    <td>{order._id}</td>
-                                    <td>{order.createdAt.substring(0, 10)}</td>
-                                    <td>${order.totalPrice.toFixed(2)}</td>
-                                    <td>{order.isPaid ? order.paidAt.substring(0, 10) : "No"}</td>
-                                    <td>{
+                                    <td data-label="ID">{order._id}</td>
+                                    <td data-label="DATE">{order.createdAt.substring(0, 10)}</td>
+                                    <td data-label="TOTAL">${order.totalPrice.toFixed(2)}</td>
+                                    <td data-label="PAID">{order.isPaid ? <Button variant="success">Paid at {order.paidAt.substring(0, 10)}</Button> : <Button variant="danger">Not Paid</Button>}</td>
+                                    <td data-label="DELIVERED">{
                                         order.isDelivered
-                                            ? order.deliveredAt.substring(0, 10)
-                                            : "No"
+                                            ? <Button variant="success">Delivered{order.deliveredAt.substring(0, 10)}</Button>
+                                            : <Button variant="danger">Not Delivered</Button>
                                     }
                                     </td>
-                                    <td>
+                                    <td data-label="DETAILS">
                                         <Button type="button" variant="light" onClick={() => navigate(`/order/${order._id}`)}>
                                             Details
                                         </Button>
+                                    </td>
+                                    <td data-label="ACTION">
+                                        <Button variant="danger" onClick={() => handleRemove(order._id)}><i className="fa-solid fa-trash-can"></i></Button>
                                     </td>
                                 </tr>
                             ))
