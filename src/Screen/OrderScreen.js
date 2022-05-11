@@ -149,7 +149,7 @@ const OrderScreen = () => {
                 }
             )
             window.location.reload();
-            if(data){
+            if (data) {
                 toast.success("Paid Successfull")
             }
 
@@ -160,130 +160,135 @@ const OrderScreen = () => {
     }
 
     return (
-        loading ? <LoadingBox></LoadingBox>
-            : error ? <MessageBox variant="danger">{error}</MessageBox>
-                : <div className='container'>
-                    <Helmet>
-                        <title>Order {orderId}</title>
-                    </Helmet>
-                    <h3 className=' my-3'> Order Id :{orderId} </h3>
-                    <Row>
-                        <Col md={8}>
-                            <Card className='mb-3'>
-                                <Card.Body>
-                                    <Card.Title>Shipping</Card.Title>
-                                    <Card.Text>
-                                        <strong>Name</strong>:{order.shippingAddress.fullname}<br />
-                                        <strong>Address</strong>:{order.shippingAddress.address}, {order.shippingAddress.city}, {order.shippingAddress.postalcode}, {order.shippingAddress.country}
-                                    </Card.Text>
-                                    {
-                                        order.isDelivered ? <MessageBox variant="success"> Delivered at, {order.deliveredAt} </MessageBox>
-                                            : <MessageBox variant="danger">Not Delivered</MessageBox>
-                                    }
-                                </Card.Body>
-                            </Card>
-                            <Card className='mb-3'>
-                                <Card.Body>
-                                    <Card.Title>Payment</Card.Title>
-                                    <Card.Text>
-                                        <strong>Name</strong>:{order.paymentMethod}
-                                    </Card.Text>
-                                    {
-                                        order.isPaid ? <MessageBox variant="success"> Paid at, {order.paidAt} </MessageBox>
-                                            : <MessageBox variant="danger">Not Paid</MessageBox>
-                                    }
-                                </Card.Body>
-                            </Card>
-                            <Card className='mb-3'>
-                                <Card.Body>
-                                    <Card.Title>Item</Card.Title>
-                                    <ListGroup>
-                                        {
-                                            order.orderItem.map(item => (
-                                                <ListGroup.Item key={item._id}>
-                                                    <Row className='align-items-center'>
-                                                        <Col md={6}>
-                                                            <img src={item.img} alt={item.img} className="img-fluid rounded img-thumbnail" />
-                                                            <Link to={`/api/products/details/${item._id}`}>
-                                                                {item.name}
-                                                            </Link>
-                                                        </Col>
-                                                        <Col md={3}><span>{item.quantity}</span></Col>
-                                                        <Col md={3}>${item.price}</Col>
+        <div className="container">
+            {
+                loading ? <LoadingBox></LoadingBox>
+                    : error ? <MessageBox variant="danger">{error}</MessageBox>
+                        : <div className='container'>
+                            <Helmet>
+                                <title>Order {orderId}</title>
+                            </Helmet>
+                            <h3 className=' my-3'> Order Id :{orderId} </h3>
+                            <Row>
+                                <Col md={8}>
+                                    <Card className='mb-3'>
+                                        <Card.Body>
+                                            <Card.Title>Shipping</Card.Title>
+                                            <Card.Text>
+                                                <strong>Name</strong>:{order.shippingAddress.fullname}<br />
+                                                <strong>Address</strong>:{order.shippingAddress.address}, {order.shippingAddress.city}, {order.shippingAddress.postalcode}, {order.shippingAddress.country}
+                                            </Card.Text>
+                                            {
+                                                order.isDelivered ? <MessageBox variant="success"> Delivered at, {order.deliveredAt} </MessageBox>
+                                                    : <MessageBox variant="danger">Not Delivered</MessageBox>
+                                            }
+                                        </Card.Body>
+                                    </Card>
+                                    <Card className='mb-3'>
+                                        <Card.Body>
+                                            <Card.Title>Payment</Card.Title>
+                                            <Card.Text>
+                                                <strong>Name</strong>:{order.paymentMethod}
+                                            </Card.Text>
+                                            {
+                                                order.isPaid ? <MessageBox variant="success"> Paid at, {order.paidAt} </MessageBox>
+                                                    : <MessageBox variant="danger">Not Paid</MessageBox>
+                                            }
+                                        </Card.Body>
+                                    </Card>
+                                    <Card className='mb-3'>
+                                        <Card.Body>
+                                            <Card.Title>Item</Card.Title>
+                                            <ListGroup>
+                                                {
+                                                    order.orderItem.map(item => (
+                                                        <ListGroup.Item key={item._id}>
+                                                            <Row className='align-items-center'>
+                                                                <Col md={6}>
+                                                                    <img src={item.img} alt={item.img} className="img-fluid rounded img-thumbnail" />
+                                                                    <Link to={`/api/products/details/${item._id}`}>
+                                                                        {item.name}
+                                                                    </Link>
+                                                                </Col>
+                                                                <Col md={3}><span>{item.quantity}</span></Col>
+                                                                <Col md={3}>${item.price}</Col>
+                                                            </Row>
+                                                        </ListGroup.Item>
+                                                    ))
+                                                }
+                                            </ListGroup>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                                <Col md={4}>
+                                    <Card>
+                                        <Card.Body>
+                                            <Card.Title>Order Summary</Card.Title>
+                                            <ListGroup variant='flush'>
+                                                <ListGroup.Item>
+                                                    <Row>
+                                                        <Col>Items</Col>
+                                                        <Col>${order.itemPrice.toFixed(2)}</Col>
                                                     </Row>
                                                 </ListGroup.Item>
-                                            ))
-                                        }
-                                    </ListGroup>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col md={4}>
-                            <Card>
-                                <Card.Body>
-                                    <Card.Title>Order Summary</Card.Title>
-                                    <ListGroup variant='flush'>
-                                        <ListGroup.Item>
-                                            <Row>
-                                                <Col>Items</Col>
-                                                <Col>${order.itemPrice.toFixed(2)}</Col>
-                                            </Row>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item>
-                                            <Row>
-                                                <Col>Shipping</Col>
-                                                <Col>${order.shippingPrice.toFixed(2)}</Col>
-                                            </Row>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item>
-                                            <Row>
-                                                <Col>Tax</Col>
-                                                <Col>${order.taxPrice.toFixed(2)}</Col>
-                                            </Row>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item>
-                                            <Row>
-                                                <Col><strong>Order total</strong></Col>
-                                                <Col><strong>${order.totalPrice.toFixed(2)}</strong></Col>
-                                            </Row>
-                                        </ListGroup.Item>
-                                        {
-                                            !order.isPaid && order.paymentMethod === "PayPal" && <ListGroup.Item>
+                                                <ListGroup.Item>
+                                                    <Row>
+                                                        <Col>Shipping</Col>
+                                                        <Col>${order.shippingPrice.toFixed(2)}</Col>
+                                                    </Row>
+                                                </ListGroup.Item>
+                                                <ListGroup.Item>
+                                                    <Row>
+                                                        <Col>Tax</Col>
+                                                        <Col>${order.taxPrice.toFixed(2)}</Col>
+                                                    </Row>
+                                                </ListGroup.Item>
+                                                <ListGroup.Item>
+                                                    <Row>
+                                                        <Col><strong>Order total</strong></Col>
+                                                        <Col><strong>${order.totalPrice.toFixed(2)}</strong></Col>
+                                                    </Row>
+                                                </ListGroup.Item>
+                                                {/* 6279e64fae2cc92c80276131 */}
                                                 {
-                                                    isPending ? <LoadingBox />
-                                                        : <div>
-                                                            <PayPalButtons
-                                                                createOrder={createOrder}
-                                                                onApprove={onApprove}
-                                                                onError={onError}
-                                                            />
-                                                        </div>
+                                                    !order.isPaid && order.paymentMethod === "PayPal" && <ListGroup.Item>
+                                                        {
+                                                            isPending ? <LoadingBox />
+                                                                : <div>
+                                                                    <PayPalButtons
+                                                                        createOrder={createOrder}
+                                                                        onApprove={onApprove}
+                                                                        onError={onError}
+                                                                    />
+                                                                </div>
+                                                        }
+                                                    </ListGroup.Item>
                                                 }
-                                            </ListGroup.Item>
-                                        }
-                                        {
-                                            !order.isPaid && order.paymentMethod === "Stripe" && < ListGroup.Item >
-                                                <StripeCheckout
-                                                    token={onToken}
-                                                    stripeKey={publishKey}
-                                                    name="Order total"
-                                                    amount={order.totalPrice * 100}
-                                                    label="Pay with Card"
-                                                    currency='USD'
-                                                    billingAddress
-                                                    shippingAddress
-                                                />
-                                            </ListGroup.Item>
-                                        }
-                                        {
-                                            loadigPay && <LoadingBox />
-                                        }
-                                    </ListGroup>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </div >
+                                                {
+                                                    !order.isPaid && order.paymentMethod === "Stripe" && < ListGroup.Item >
+                                                        <StripeCheckout
+                                                            token={onToken}
+                                                            stripeKey={publishKey}
+                                                            name="Order total"
+                                                            amount={order.totalPrice * 100}
+                                                            label="Pay with Card"
+                                                            currency='USD'
+                                                            billingAddress
+                                                            shippingAddress
+                                                        />
+                                                    </ListGroup.Item>
+                                                }
+                                                {
+                                                    loadigPay && <LoadingBox />
+                                                }
+                                            </ListGroup>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            </Row>
+                        </div >
+            }
+        </div>
     );
 };
 

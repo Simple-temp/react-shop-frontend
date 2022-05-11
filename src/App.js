@@ -25,6 +25,7 @@ import DashBoardScreen from './Screen/DashBoardScreen';
 import ProductListScreen from './Screen/ProductListScreen';
 import OrderListScreen from './Screen/OrderListScreen';
 import UserListScreen from './Screen/UserListScreen';
+import ProductEditScreen from './Screen/ProductEditScreen';
 
 
 function App() {
@@ -103,21 +104,25 @@ function App() {
 
             {/* admin routes */}
 
-            <Route path="/dashboard" element={
+            <Route path="admin/dashboard" element={
               <AdminProtectedRoute>
                 <DashBoardScreen />
               </AdminProtectedRoute>} />
-            <Route path="/productlist" element={
+            <Route path="admin/productlist" element={
               <AdminProtectedRoute>
                 <ProductListScreen />
               </AdminProtectedRoute>} />
-            <Route path="/orderlist" element={
+            <Route path="admin/orderlist" element={
               <AdminProtectedRoute>
                 <OrderListScreen />
               </AdminProtectedRoute>} />
-            <Route path="/userlist" element={
+            <Route path="admin/userlist" element={
               <AdminProtectedRoute>
                 <UserListScreen />
+              </AdminProtectedRoute>} />
+            <Route path="admin/productedit/:id" element={
+              <AdminProtectedRoute>
+                <ProductEditScreen />
               </AdminProtectedRoute>} />
           </Routes>
         </main>

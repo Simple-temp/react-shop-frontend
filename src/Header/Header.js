@@ -60,16 +60,16 @@ const Header = ({ sideBarIsOpen, setSideBarIsOpen }) => {
                         {
                             userInfo  && userInfo.isAdmin &&
                                 (<NavDropdown title="Admin" id="basic-nav-dropdown">
-                                    <LinkContainer to="/dashboard">
+                                    <LinkContainer to="admin/dashboard">
                                         <NavDropdown.Item> Dashboard</NavDropdown.Item>
                                     </LinkContainer>
-                                    <LinkContainer to="/productlist">
+                                    <LinkContainer to="admin/productlist">
                                         <NavDropdown.Item> Product List </NavDropdown.Item>
                                     </LinkContainer>
-                                    <LinkContainer to="/orderlist">
+                                    <LinkContainer to="admin/orderlist">
                                         <NavDropdown.Item> Orders List</NavDropdown.Item>
                                     </LinkContainer>
-                                    <LinkContainer to="/userlist">
+                                    <LinkContainer to="admin/userlist">
                                         <NavDropdown.Item> User List</NavDropdown.Item>
                                     </LinkContainer>
                                 </NavDropdown>)

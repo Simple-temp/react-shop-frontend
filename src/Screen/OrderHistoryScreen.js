@@ -55,7 +55,7 @@ const OrderHistoryScreen = () => {
     }, [userInfo])
 
 
-    const handleRemove = async (id) =>{
+    const handleRemove = async (id) => {
         try {
             const { data } = await axios.delete(`https://store00-1.herokuapp.com/api/orders/${id}/delete`,
                 {
@@ -63,7 +63,7 @@ const OrderHistoryScreen = () => {
                 }
             )
             window.location.reload();
-            if(data){
+            if (data) {
                 toast.success("Delete Successfull")
             }
 
@@ -74,52 +74,59 @@ const OrderHistoryScreen = () => {
 
 
     return (
-        loading ? <LoadingBox></LoadingBox>
-            : error ? <MessageBox variant="danger">{error}</MessageBox>
-                : <div className='container'>
-                    <Helmet>
-                        <title>Preview Order</title>
-                    </Helmet>
-                    <h3 className='text-center my-3'>Order history</h3>
-                    <table className='table'>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>DATE</th>
-                                <th>TOTAL</th>
-                                <th>PAID</th>
-                                <th>DELIVERED</th>
-                                <th>DETAILS</th>
-                                <th>ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {orders.map((order) => (
-                                <tr key={order._id}>
-                                    <td data-label="ID">{order._id}</td>
-                                    <td data-label="DATE">{order.createdAt.substring(0, 10)}</td>
-                                    <td data-label="TOTAL">${order.totalPrice.toFixed(2)}</td>
-                                    <td data-label="PAID">{order.isPaid ? <Button variant="success">Paid at {order.paidAt.substring(0, 10)}</Button> : <Button variant="danger">Not Paid</Button>}</td>
-                                    <td data-label="DELIVERED">{
-                                        order.isDelivered
-                                            ? <Button variant="success">Delivered{order.deliveredAt.substring(0, 10)}</Button>
-                                            : <Button variant="danger">Not Delivered</Button>
-                                    }
-                                    </td>
-                                    <td data-label="DETAILS">
-                                        <Button type="button" variant="light" onClick={() => navigate(`/order/${order._id}`)}>
-                                            Details
-                                        </Button>
-                                    </td>
-                                    <td data-label="ACTION">
-                                        <Button variant="danger" onClick={() => handleRemove(order._id)}><i className="fa-solid fa-trash-can"></i></Button>
-                                    </td>
-                                </tr>
-                            ))
-                            }
-                        </tbody>
-                    </table>
-                </div>
+        <div className="container">
+            {
+                loading ? <LoadingBox></LoadingBox>
+                    : error ? <MessageBox variant="danger">{error}</MessageBox>
+                        : <div className='container'>
+                            <Helmet>
+                                <title>Preview Order</title>
+                            </Helmet>
+                            <h3 className='text-center my-3'>Order history</h3>
+                            <table className='table'>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>DATE</th>
+                                        <th>TOTAL</th>
+                                        <th>PAID</th>
+                                        <th>DELIVERED</th>
+                                        <th>DETAILS</th>
+                                        <th>ACTION</th>
+                                    </tr>
+                                </thead>
+                                {
+                                    orders.length === 0 ? <h5 className='text-secondary'>No Order Available</h5>
+                                        : <tbody>
+                                            {orders.map((order) => (
+                                                <tr key={order._id}>
+                                                    <td data-label="ID">{order._id}</td>
+                                                    <td data-label="DATE">{order.createdAt.substring(0, 10)}</td>
+                                                    <td data-label="TOTAL">${order.totalPrice.toFixed(2)}</td>
+                                                    <td data-label="PAID">{order.isPaid ? <Button variant="outline-success">Paid at {order.paidAt.substring(0, 10)}</Button> : <Button variant="outline-danger">Not Paid</Button>}</td>
+                                                    <td data-label="DELIVERED">{
+                                                        order.isDelivered
+                                                            ? <Button variant="outline-success">Delivered{order.deliveredAt.substring(0, 10)}</Button>
+                                                            : <Button variant="outline-danger">Not Delivered</Button>
+                                                    }
+                                                    </td>
+                                                    <td data-label="DETAILS">
+                                                        <Button type="button" variant="outline-secondary" onClick={() => navigate(`/order/${order._id}`)}>
+                                                            Details
+                                                        </Button>
+                                                    </td>
+                                                    <td data-label="ACTION">
+                                                        <Button variant="outline-danger" onClick={() => handleRemove(order._id)}><i className="fa-solid fa-trash-can"></i></Button>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                            }
+                                        </tbody>
+                                }
+                            </table>
+                        </div>
+            }
+        </div>
     );
 };
 
