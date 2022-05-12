@@ -38,7 +38,7 @@ const UserListScreen = () => {
         const fetchData = async () => {
             dispatch({ type: "FETCH_REQUEST" })
             try {
-                const { data } = await axios.get("https://store00-1.herokuapp.com/api/users",
+                const { data } = await axios.get("https://ecomerce-00.herokuapp.com/api/users",
                     {
                         headers: { authorization: `Bearer ${userInfo.token}` }
                     }
@@ -58,7 +58,7 @@ const UserListScreen = () => {
 
     const handleRemove = async (id) => {
         try {
-            const { data } = await axios.delete(`https://store00-1.herokuapp.com/api/users/${id}/delete`,
+            const { data } = await axios.delete(`https://ecomerce-00.herokuapp.com/api/users/${id}/delete`,
                 {
                     headers: { authorization: `Bearer ${userInfo.token}` },
                 }

@@ -39,7 +39,7 @@ const OrderListScreen = () => {
         const fetchData = async () => {
             dispatch({ type: "FETCH_REQUEST" })
             try {
-                const { data } = await axios.get(" https://store00-1.herokuapp.com/api/orders",
+                const { data } = await axios.get(" https://ecomerce-00.herokuapp.com/api/orders",
                     {
                         headers: { authorization: `Bearer ${userInfo.token}` }
                     }
@@ -55,7 +55,7 @@ const OrderListScreen = () => {
 
         const fetchUser = async () => {
             try {
-                const { data } = await axios.get(" https://store00-1.herokuapp.com/api/users/",
+                const { data } = await axios.get(" https://ecomerce-00.herokuapp.com/api/users/",
                     {
                         headers: { authorization: `Bearer ${userInfo.token}` }
                     }
@@ -74,7 +74,7 @@ const OrderListScreen = () => {
 
     const handleRemove = async (id) => {
         try {
-            const { data } = await axios.delete(`https://store00-1.herokuapp.com/api/orders/${id}/delete`,
+            const { data } = await axios.delete(`https://ecomerce-00.herokuapp.com/api/orders/${id}/delete`,
                 {
                     headers: { authorization: `Bearer ${userInfo.token}` },
                 }
@@ -93,7 +93,7 @@ const OrderListScreen = () => {
     const handleDelivered = async (id) => {
         try {
 
-            const { data } = await axios.put(`https://store00-1.herokuapp.com/api/orders/${id}/delireved`,
+            const { data } = await axios.put(`https://ecomerce-00.herokuapp.com/api/orders/${id}/delireved`,
                 { headers: { authorization: `Bearer ${userInfo.token}` }, }
             )
             if (data) {

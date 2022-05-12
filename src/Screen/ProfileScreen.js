@@ -40,7 +40,7 @@ const ProfileScreen = () => {
             return;
         }
         try {
-            const { data } = await axios.put("https://store00-1.herokuapp.com/api/users/profile",
+            const { data } = await axios.put("https://ecomerce-00.herokuapp.com/api/users/profile",
                 {
                     name,
                     email,

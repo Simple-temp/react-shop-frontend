@@ -26,6 +26,7 @@ import ProductListScreen from './Screen/ProductListScreen';
 import OrderListScreen from './Screen/OrderListScreen';
 import UserListScreen from './Screen/UserListScreen';
 import ProductEditScreen from './Screen/ProductEditScreen';
+import AddNewProductScreen from './Screen/AddNewProductScreen';
 
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get(`https://store00-1.herokuapp.com/api/products/categories`)
+        const { data } = await axios.get(`https://ecomerce-00.herokuapp.com/api/products/categories`)
         console.log(data)
         setCategories(data)
       } catch (err) {
@@ -119,6 +120,10 @@ function App() {
             <Route path="admin/userlist" element={
               <AdminProtectedRoute>
                 <UserListScreen />
+              </AdminProtectedRoute>} />
+            <Route path="admin/addnew" element={
+              <AdminProtectedRoute>
+                <AddNewProductScreen />
               </AdminProtectedRoute>} />
             <Route path="admin/productedit/:id" element={
               <AdminProtectedRoute>

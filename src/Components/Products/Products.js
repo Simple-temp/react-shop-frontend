@@ -16,7 +16,7 @@ const Products = (props) => {
     const HomeAddToCart = async (item) =>{
         const existItem = cartItem.find( x => x._id === items._id )
         const quantity = existItem ? existItem.quantity + 1 : 1
-        const { data } = await axios.get(`https://store00-1.herokuapp.com/api/products/cart/${item._id}`)
+        const { data } = await axios.get(`https://ecomerce-00.herokuapp.com/api/products/cart/${item._id}`)
         if(data.stock < quantity){
             window.alert("Sorry, product is out of stock");
             return;
@@ -27,7 +27,7 @@ const Products = (props) => {
     }
 
     return (
-        <Card className="col-lg-4 col-md-6 col-sm-12 ca">
+        <Card className="col-lg-3 col-md-6 col-sm-12 ca">
             <div className="items m-2 p-3">
                 <Link to={`/api/products/details/${items._id}`}>
                     <Card.Img variant="top" src={items.img} alt={items.img} className="d-block mx-auto img-fluid" style={{ height: "263px" }} />

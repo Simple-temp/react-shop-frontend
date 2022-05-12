@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useReducer, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import LoadingBox from '../Components/LoadingBox/LoadingBox';
 import MessageBox from '../Components/MessageBox/MessageBox';
@@ -41,8 +41,9 @@ const ProductEditScreen = () => {
     const [name, setName] = useState("")
     const [description, setdescription] = useState("")
     const [rating, setrating] = useState("")
-    const [reviews, setreviews] = useState("")
+    const [stock, setstock] = useState("")
     const [price, setprice] = useState("")
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -50,7 +51,7 @@ const ProductEditScreen = () => {
         const fetchData = async () => {
             try {
                 dispatch({ type: "FETCH_REQUEST" })
-                const { data } = await axios.get(`https://store00-1.herokuapp.com/api/products/edit/${id}`)
+                const { data } = await axios.get(`https://ecomerce-00.herokuapp.com/api/products/edit/${id}`)
                 dispatch({ type: "FETCH_SUCCESS", payload: data })
                 console.log(data)
             } catch (err) {
@@ -67,18 +68,19 @@ const ProductEditScreen = () => {
         e.preventDefault()
         try {
             dispatch({ type: "UPDATE_REQUEST" })
-            const { data } = await axios.put(`https://store00-1.herokuapp.com/api/products/update/${id}`,
+            const { data } = await axios.put(`https://ecomerce-00.herokuapp.com/api/products/update/${id}`,
                 {
                     img,
                     name,
                     description,
                     rating,
-                    reviews,
+                    stock,
                     price,
                 }
             )
             dispatch({ type: "UPDATE_SUCCESS", payload: data })
             toast.success("Product Updated ")
+            navigate("/admin/productlist")
         } catch (err) {
             dispatch({ type: "UPDATE_FAIL", payload: err.message })
             toast.error("Product do not update")
@@ -122,11 +124,11 @@ const ProductEditScreen = () => {
                                         onChange={(e) => setrating(e.target.value)}
                                         defaultValue={product.rating}></Form.Control>
                                 </Form.Group>
-                                <Form.Group className='mb-3' controlId='Reviews'>
-                                    <Form.Label>Reviews</Form.Label>
+                                <Form.Group className='mb-3' controlId='setstock'>
+                                    <Form.Label>Stock</Form.Label>
                                     <Form.Control type='number' required
-                                        onChange={(e) => setreviews(e.target.value)}
-                                        defaultValue={product.reviews}></Form.Control>
+                                        onChange={(e) => setstock(e.target.value)}
+                                        defaultValue={product.stock}></Form.Control>
                                 </Form.Group>
                                 <Form.Group className='mb-3' controlId='price'>
                                     <Form.Label>Price</Form.Label>

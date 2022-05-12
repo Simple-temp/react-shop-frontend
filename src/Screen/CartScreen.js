@@ -15,7 +15,7 @@ const CartScreen = () => {
     const { cart: { cartItem } } = state
 
     const updateAddToCart = async (item, quantity) =>{
-        const { data } = await axios.get(`https://store00-1.herokuapp.com/api/products/cart/${item._id}`)
+        const { data } = await axios.get(`https://ecomerce-00.herokuapp.com/api/products/cart/${item._id}`)
         if(data.stock < quantity){
             window.alert("Sorry, product is out of stock");
             return;

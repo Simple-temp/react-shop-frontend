@@ -38,7 +38,7 @@ const OrderHistoryScreen = () => {
         const fetchData = async () => {
             dispatch({ type: "FETCH_REQUEST" })
             try {
-                const { data } = await axios.get("https://store00-1.herokuapp.com/api/orders/mine",
+                const { data } = await axios.get("https://ecomerce-00.herokuapp.com/api/orders/mine",
                     {
                         headers: { authorization: `Bearer ${userInfo.token}` }
                     }
@@ -57,7 +57,7 @@ const OrderHistoryScreen = () => {
 
     const handleRemove = async (id) => {
         try {
-            const { data } = await axios.delete(`https://store00-1.herokuapp.com/api/orders/${id}/delete`,
+            const { data } = await axios.delete(`https://ecomerce-00.herokuapp.com/api/orders/${id}/delete`,
                 {
                     headers: { authorization: `Bearer ${userInfo.token}` },
                 }
