@@ -7,7 +7,20 @@ import { toast } from 'react-toastify';
 import LoadingBox from '../Components/LoadingBox/LoadingBox';
 import MessageBox from '../Components/MessageBox/MessageBox';
 import Rating from '../Components/Rating/Rating';
+import Modal from 'react-modal';
 
+const customStyles = {
+    content: {
+        height: "250px",
+        width: "340px",
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -74,6 +87,16 @@ const ProductListScreen = () => {
         }
     }
 
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+
     return (
         <div className='container'>
             <Helmet>
@@ -117,7 +140,18 @@ const ProductListScreen = () => {
                                             </Card.Body>
                                             <div className='d-flex justify-content-between'>
                                                 <Button variant='outline-dark' onClick={() => navigate(`/admin/productedit/${items._id}`)} >Edit</Button>
-                                                <Button variant='outline-danger' onClick={()=>handleRemoveProduct(items._id)}><i className="fa-solid fa-trash-can"></i></Button>
+                                                <Modal
+                                                    isOpen={modalIsOpen}
+                                                    onRequestClose={closeModal}
+                                                    style={customStyles}
+                                                >
+                                                    <h4 className='text-center mt-5'>Are you sure ?</h4>
+                                                    <div className='confirm-box__actions mt-3'>
+                                                        <button onClick={() => handleRemoveProduct(items._id)} className="outline-success">Confirm</button>
+                                                        <button onClick={closeModal} className="outline-danger">Cancel</button>
+                                                    </div>
+                                                </Modal>
+                                                <Button variant='outline-danger' onClick={openModal}><i className="fa-solid fa-trash-can"></i></Button>
                                             </div>
                                         </div>
                                     </Card>

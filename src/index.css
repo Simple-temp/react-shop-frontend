@@ -100,6 +100,23 @@ main{
   font-weight:bold;
 }
 
+.confirm-box__actions button{
+  background: transparent;
+  border:1px solid rgb(255, 0, 0);
+  color:rgb(0, 0, 0);
+  padding:5px 9px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  display: block;
+  margin: auto;
+}
+.confirm-box__actions button:nth-child(1){
+  border:1px solid rgb(51, 255, 0);
+}
+
 .table
 {
     background-color: #fff;

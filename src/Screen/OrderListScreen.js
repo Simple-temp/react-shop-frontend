@@ -7,6 +7,20 @@ import { toast } from 'react-toastify';
 import LoadingBox from '../Components/LoadingBox/LoadingBox';
 import MessageBox from '../Components/MessageBox/MessageBox';
 import { Store } from '../Store';
+import Modal from 'react-modal';
+
+const customStyles = {
+    content: {
+        height: "250px",
+        width: "340px",
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -90,6 +104,16 @@ const OrderListScreen = () => {
     }
 
 
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+
     const handleDelivered = async (id) => {
         try {
 
@@ -107,7 +131,6 @@ const OrderListScreen = () => {
             toast.error("Not Delivered")
         }
     }
-
 
     return (
         <div className="container">
@@ -160,7 +183,20 @@ const OrderListScreen = () => {
                                                 </Button>
                                             </td>
                                             <td data-label="ACTION">
-                                                <Button variant="outline-danger" onClick={() => handleRemove(order._id)}><i className="fa-solid fa-trash-can"></i></Button>
+                                                <Modal
+                                                    isOpen={modalIsOpen}
+                                                    onRequestClose={closeModal}
+                                                    style={customStyles}
+                                                >
+                                                    <h4 className='text-center mt-5'>Are you sure ?</h4>
+                                                    <div className='confirm-box__actions mt-3'>
+                                                        <button onClick={() => handleRemove(order._id)} className="outline-success">Confirm</button>
+                                                        <button onClick={closeModal} className="outline-danger">Cancel</button>
+                                                    </div>
+                                                </Modal>
+                                                <Button variant="outline-danger" onClick={openModal}>
+                                                    <i className="fa-solid fa-trash-can"></i>
+                                                </Button>
                                             </td>
                                         </tr>
 

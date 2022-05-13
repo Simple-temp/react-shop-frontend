@@ -6,8 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import { HelmetProvider } from 'react-helmet-async';
 import StoreProvider from './Store';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import Modal from 'react-modal/lib/components/Modal';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'),Modal.setAppElement('#root'));
 root.render(
   <React.StrictMode>
     <StoreProvider>

@@ -1,11 +1,26 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-toastify';
 import LoadingBox from '../Components/LoadingBox/LoadingBox';
 import MessageBox from '../Components/MessageBox/MessageBox';
 import { Store } from '../Store';
+import { confirm } from "react-confirm-box";
+import Modal from 'react-modal';
+
+const customStyles = {
+    content: {
+        height: "250px",
+        width: "340px",
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
 
 
 const reducer = (state, action) => {
@@ -73,6 +88,15 @@ const UserListScreen = () => {
         }
     }
 
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
 
     return (
         <div className="container">
@@ -105,7 +129,18 @@ const UserListScreen = () => {
                                                         <td data-label="EMAIL">{user.email}</td>
                                                         <td data-label="CREATED-AT">{user.createdAt.substring(0, 10)}</td>
                                                         <td data-label="ACTION">
-                                                            <Button variant="outline-danger" onClick={() => handleRemove(user._id)}><i className="fa-solid fa-trash-can"></i></Button>
+                                                            <Modal
+                                                                isOpen={modalIsOpen}
+                                                                onRequestClose={closeModal}
+                                                                style={customStyles}
+                                                            >
+                                                                <h4 className='text-center mt-5'>Are you sure ?</h4>
+                                                                <div className='confirm-box__actions mt-3'>
+                                                                    <button onClick={() => handleRemove(user._id)} className="outline-success">Confirm</button>
+                                                                    <button onClick={closeModal} className="outline-danger">Cancel</button>
+                                                                </div>
+                                                            </Modal>
+                                                            <Button variant="outline-danger" onClick={openModal}><i className="fa-solid fa-trash-can"></i></Button>
                                                         </td>
                                                     </>
                                                 )
