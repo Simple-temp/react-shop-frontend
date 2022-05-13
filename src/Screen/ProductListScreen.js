@@ -118,7 +118,7 @@ const ProductListScreen = () => {
                     <Button type="button" variant='outline-success' onClick={() => navigate("/admin/addnew")}>Add new product</Button>
                 </div>
                 {
-                    loading ? <LoadingBox />
+                    loading ? <div className='loading'><LoadingBox/> </div>
                         :
                         error ? <MessageBox variant="danger">{error}</MessageBox>
                             : outputdata.map(items => (

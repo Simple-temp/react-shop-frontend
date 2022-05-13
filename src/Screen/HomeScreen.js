@@ -35,7 +35,7 @@ const HomeScreen = () => {
                 <title>Store00</title>
             </Helmet>
             <div className="row mt-4">
-                {loading ? <LoadingBox/> 
+                {loading ? <div className='loading'><LoadingBox/> </div>
                     :
                     error ? <MessageBox variant="danger">{error}</MessageBox>
                         :

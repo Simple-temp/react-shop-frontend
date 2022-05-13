@@ -135,7 +135,7 @@ const OrderListScreen = () => {
     return (
         <div className="container">
             {
-                loading ? <LoadingBox></LoadingBox>
+                loading ? <div className='loading'><LoadingBox/> </div>
                     : error ? <MessageBox variant="danger">{error}</MessageBox>
                         : <div className='container'>
                             <Helmet>

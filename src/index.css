@@ -54,6 +54,32 @@ main{
   -ms-transition: 0.4s;
   -o-transition: 0.4s;
 }
+.loading{
+  position: absolute;
+  top:50%;
+  lefT:50%;
+  width:300px;
+  height:300px;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+}
+.spinner-border {
+  display: inline-block;
+  width: 4rem;
+  height: 4rem;
+  vertical-align: -0.125em;
+  border: 0.25em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: .75s linear infinite spinner-border;
+  animation: .75s linear infinite spinner-border;
+  top: 45%;
+  left: 45%;
+  position: absolute;
+}
 .rating span i {
   color:#ffc000
 }

@@ -81,7 +81,7 @@ const DashBoardScreen = () => {
         <div className='container'>
             <h3 className='text-center my-3'>Dashboard</h3>
             {
-                loading ? <LoadingBox></LoadingBox>
+                loading ? <div className='loading'><LoadingBox/> </div>
                     : error ? <MessageBox variant="danger">{error}</MessageBox>
                         : <Row>
                             <Col md={6}>

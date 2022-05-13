@@ -96,7 +96,7 @@ const ProductEditScreen = () => {
                 </Helmet>
                 <h3 className='text-center my-3'>Edit Product</h3>
                 {
-                    loading ? <LoadingBox />
+                    loading ? <div className='loading'><LoadingBox/> </div>
                         :
                         error ? <MessageBox variant="danger">{error}</MessageBox>
                             : <Form onSubmit={(e) => haldleSubmit(e, id)}>
