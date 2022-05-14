@@ -23,7 +23,7 @@ const SignInScreen = () => {
         e.preventDefault()
         try {
 
-            const { data } = await axios.post("https://ecomerce-00.herokuapp.com/api/users/signin", {
+            const { data } = await axios.post("https://website-12.herokuapp.com/api/users/signin", {
                 email,
                 password
             })

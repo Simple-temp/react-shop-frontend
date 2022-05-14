@@ -43,7 +43,7 @@ const AddNewProductScreen = () => {
         e.preventDefault()
         try {
             dispatch({ type: "FETCH_REQUEST" })
-            const { data } = await axios.post(`https://ecomerce-00.herokuapp.com/api/products`, {
+            const { data } = await axios.post(`https://website-12.herokuapp.com/api/products`, {
                 slug,
                 name,
                 category,

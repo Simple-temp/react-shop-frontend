@@ -1,6 +1,6 @@
 {
   "name": "shop-frontend",
-  "proxy": "https://ecomerce-00.herokuapp.com/",
+  "proxy": "https://website-12.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

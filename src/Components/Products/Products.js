@@ -16,7 +16,7 @@ const Products = (props) => {
     const HomeAddToCart = async (item) =>{
         const existItem = cartItem.find( x => x._id === items._id )
         const quantity = existItem ? existItem.quantity + 1 : 1
-        const { data } = await axios.get(`https://ecomerce-00.herokuapp.com/api/products/cart/${item._id}`)
+        const { data } = await axios.get(`https://website-12.herokuapp.com/api/products/cart/${item._id}`)
         if(data.stock < quantity){
             window.alert("Sorry, product is out of stock");
             return;

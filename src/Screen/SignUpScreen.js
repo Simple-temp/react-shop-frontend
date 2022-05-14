@@ -29,7 +29,7 @@ const SignUpScreen = () => {
         }
         try {
 
-            const { data } = await axios.post("https://ecomerce-00.herokuapp.com/api/users/signup", {
+            const { data } = await axios.post("https://website-12.herokuapp.com/api/users/signup", {
                 name,
                 email,
                 password

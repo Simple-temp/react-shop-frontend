@@ -46,7 +46,7 @@ const PlaceOrderScreen = () => {
     const placeOrderHandler = async () => {
         try {
             dispatch({ type: "CREATE_REQUEST" })
-            const { data } = await axios.post("https://ecomerce-00.herokuapp.com/api/orders",
+            const { data } = await axios.post("https://website-12.herokuapp.com/api/orders",
                 {
                     orderItem: cart.cartItem,
                     shippingAddress: cart.shippingAddress,
