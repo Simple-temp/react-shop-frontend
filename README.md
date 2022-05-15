@@ -1,6 +1,7 @@
 # Amazon clone..
 <h6>Note : This website backend-server publish on heroku. sometime post-request and put-request faced error like Internal server error(500) and cross origin error.
 It's happend sometime but it fixed by rename same db collection name for the Internal server error and the other error cross origin to do change the backend-server app which is publish on heroku. </h6>
+<h5> admin gmail : admin@gmail.com <br/> admin pass: 123456</h5>
 
 <h4> This is a mern-stack project .here have</h4>
 1. home screen <br/>
