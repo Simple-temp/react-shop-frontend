@@ -38,7 +38,7 @@ const DashBoardScreen = () => {
         const fetchOrder = async () => {
             dispatch({ type: "FETCH_REQUEST" })
             try {
-                const { data } = await axios.get("https://website-12.herokuapp.com/api/orders")
+                const { data } = await axios.get("https://shop-dwhw.onrender.com/api/orders")
                 dispatch({ type: "FETCH_SUCCESS_ORDER", payload: data })
                 console.log(data)
             } catch (err) {
@@ -51,7 +51,7 @@ const DashBoardScreen = () => {
         const fetchProducts = async () => {
             dispatch({ type: "FETCH_REQUEST" })
             try {
-                const result = await axios.get("https://website-12.herokuapp.com/api/products",)
+                const result = await axios.get("https://shop-dwhw.onrender.com/api/products",)
                 setproducts(result.data)
                 console.log(result.data)
             } catch (err) {
@@ -64,7 +64,7 @@ const DashBoardScreen = () => {
         const fetchUser = async () => {
             try {
                 dispatch({ type: "FETCH_REQUEST" })
-                const { data } = await axios.get("https://website-12.herokuapp.com/api/users/")
+                const { data } = await axios.get("https://shop-dwhw.onrender.com/api/users/")
                 setUsers(data)
                 console.log(data)
             } catch (err) {

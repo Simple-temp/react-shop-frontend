@@ -61,7 +61,7 @@ const ProductListScreen = () => {
         const fetchData = async () => {
             dispatch({ type: "FETCH_REQUEST" })
             try {
-                const result = await axios.get("https://website-12.herokuapp.com/api/products",)
+                const result = await axios.get("https://shop-dwhw.onrender.com/api/products",)
                 dispatch({ type: "FETCH_SUCCESS", payload: result.data })
                 console.log(result.data)
             } catch (err) {
@@ -75,7 +75,7 @@ const ProductListScreen = () => {
 
     const handleRemoveProduct = async (id) =>{
         try {
-            const { data } = await axios.delete(`https://website-12.herokuapp.com/api/products/${id}/delete`,
+            const { data } = await axios.delete(`https://shop-dwhw.onrender.com/api/products/${id}/delete`,
             )
             window.location.reload();
             if (data) {

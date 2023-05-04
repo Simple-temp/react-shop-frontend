@@ -1,6 +1,6 @@
 {
   "name": "shop-frontend",
-  "proxy": "https://website-12.herokuapp.com/",
+  "proxy": "https://shop-dwhw.onrender.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

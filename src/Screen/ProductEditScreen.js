@@ -51,7 +51,7 @@ const ProductEditScreen = () => {
         const fetchData = async () => {
             try {
                 dispatch({ type: "FETCH_REQUEST" })
-                const { data } = await axios.get(`https://website-12.herokuapp.com/api/products/edit/${id}`)
+                const { data } = await axios.get(`https://shop-dwhw.onrender.com/api/products/edit/${id}`)
                 dispatch({ type: "FETCH_SUCCESS", payload: data })
                 console.log(data)
             } catch (err) {
@@ -68,7 +68,7 @@ const ProductEditScreen = () => {
         e.preventDefault()
         try {
             dispatch({ type: "UPDATE_REQUEST" })
-            const { data } = await axios.put(`https://website-12.herokuapp.com/api/products/update/${id}`,
+            const { data } = await axios.put(`https://shop-dwhw.onrender.com/api/products/update/${id}`,
                 {
                     img,
                     name,

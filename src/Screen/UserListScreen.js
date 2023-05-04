@@ -53,7 +53,7 @@ const UserListScreen = () => {
         const fetchData = async () => {
             dispatch({ type: "FETCH_REQUEST" })
             try {
-                const { data } = await axios.get("https://website-12.herokuapp.com/api/users",
+                const { data } = await axios.get("https://shop-dwhw.onrender.com/api/users",
                     {
                         headers: { authorization: `Bearer ${userInfo.token}` }
                     }
@@ -73,7 +73,7 @@ const UserListScreen = () => {
 
     const handleRemove = async (id) => {
         try {
-            const { data } = await axios.delete(`https://website-12.herokuapp.com/api/users/${id}/delete`,
+            const { data } = await axios.delete(`https://shop-dwhw.onrender.com/api/users/${id}/delete`,
                 {
                     headers: { authorization: `Bearer ${userInfo.token}` },
                 }

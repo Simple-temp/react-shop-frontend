@@ -88,7 +88,7 @@ const SearchScreen = () => {
             try {
 
                 const { data } = await axios.get(
-                    `https://website-12.herokuapp.com/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
+                    `https://shop-dwhw.onrender.com/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
                 )
                 dispatch({ type: "FETCH_SUCCESS", payload: data })
 
@@ -105,7 +105,7 @@ const SearchScreen = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const { data } = await axios.get(`https://website-12.herokuapp.com/api/products/categories`)
+                const { data } = await axios.get(`https://shop-dwhw.onrender.com/api/products/categories`)
                 // console.log(data)
                 setCategories(data)
             } catch (err) {
@@ -132,7 +132,7 @@ const SearchScreen = () => {
     const HomeAddToCart = async (item) =>{
         const existItem = cartItem.find( x => x._id === products._id )
         const quantity = existItem ? existItem.quantity + 1 : 1
-        const { data } = await axios.get(`https://website-12.herokuapp.com/api/products/cart/${item._id}`)
+        const { data } = await axios.get(`https://shop-dwhw.onrender.com/api/products/cart/${item._id}`)
         if(data.stock < quantity){
             window.alert("Sorry, product is out of stock");
             return;

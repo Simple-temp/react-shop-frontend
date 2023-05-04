@@ -38,7 +38,7 @@ function App() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get(`https://website-12.herokuapp.com/api/products/categories`)
+        const { data } = await axios.get(`https://shop-dwhw.onrender.com/api/products/categories`)
         console.log(data)
         setCategories(data)
       } catch (err) {
